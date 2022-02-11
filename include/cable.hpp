@@ -16,7 +16,7 @@ class Cable
         Cable(int inputPins[], int outputPins[]);
 
         // codeur
-        void envoi();
+        void envoi(uint8_t data);
         // decodeur
         void reception();
 
