@@ -92,20 +92,20 @@ void Cable::checkCable(){
 };
 
 void Cable::checkCableType(){
-    bool droit = true;
-    int CodeSend[] = {0x1, 0x2, 0x4, 0x20};
-    int CodeReci[] = {0x4, 0x20, 0x1, 0x2};
+    bool croise = true;
+    uint8_t CodeSend[] = {0x01, 0x02, 0x08, 0x10, 0x04, 0x20, 0x40, 0x80};
+    uint8_t CodeReci[] = {0x04, 0x20, 0x08, 0x10, 0x01, 0x02, 0x40, 0x80};
 
     for(int i = 0; i < sizeof(CodeReci)/sizeof(int) ; i++){
         Serial.println(i);
         if(!this->verifyCodes(CodeSend[i], CodeReci[i])){
-            droit = false;
+            croise = false;
             continue;
         }
     }
 
-    if(droit){
-        Serial.println("Le cable est croise");
+    if(croise){
+        Serial.println("Le cable est Croise");
     }
     else{
         Serial.println("Le cable est Droit");
