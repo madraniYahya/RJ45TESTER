@@ -33,10 +33,10 @@ void setup() {
 void loop() {
 
   // Tester si le cable confionne
-  //cable.checkCable();
+  cable.checkCable();
 
   // Verifier si le cable est droit ou croise
-  cable.checkCableType();
+  //cable.checkCableType();
 
   delay(3000);
 }

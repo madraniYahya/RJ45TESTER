@@ -23,7 +23,7 @@ void Cable::envoi(uint8_t data){
 
     for (int i = 0; i < 8; i++)
     {
-        if (data & (1 << i)){
+        if (this->dataS & (1 << i)){
             Serial.println((String)"Le bit "+i+" est a 1 Broch output "+this->outputPins[i]);
             digitalWrite(this->outputPins[i], HIGH);
         }else{
@@ -83,7 +83,7 @@ bool Cable::verifyCodes(uint8_t send, uint8_t recieve){
 }
 
 void Cable::checkCable(){
-    if( this->verifyCodes(0xFF, 0xFF)){
+    if(this->verifyCodes(0xFF, 0xFF)){
         Serial.println("Le cable est fonctionnel");
     }
     else{
