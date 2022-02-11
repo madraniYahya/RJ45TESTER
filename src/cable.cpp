@@ -70,6 +70,44 @@ void Cable::printOutputPins(){
     }
 };
 
-bool Cable::checkCable(){
-    return this->dataR == this->dataS;
+bool Cable::verifyCodes(uint8_t send, uint8_t recieve){
+    this->dataS = send;
+
+    this->envoi(this->dataS);
+    this->reception();
+
+    if(recieve == this->dataR)
+        return true;
+  
+    return false;
 }
+
+void Cable::checkCable(){
+    if( this->verifyCodes(0xFF, 0xFF)){
+        Serial.println("Le cable est fonctionnel");
+    }
+    else{
+        Serial.println("Le cable n'est pas fonctionnel");
+    }
+};
+
+void Cable::checkCableType(){
+    bool droit = true;
+    int CodeSend[] = {0x1, 0x2, 0x4, 0x20};
+    int CodeReci[] = {0x4, 0x20, 0x1, 0x2};
+
+    for(int i = 0; i < sizeof(CodeReci)/sizeof(int) ; i++){
+        Serial.println(i);
+        if(!this->verifyCodes(CodeSend[i], CodeReci[i])){
+            droit = false;
+            continue;
+        }
+    }
+
+    if(droit){
+        Serial.println("Le cable est croise");
+    }
+    else{
+        Serial.println("Le cable est Droit");
+    }
+};

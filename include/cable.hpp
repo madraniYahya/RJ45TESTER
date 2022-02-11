@@ -11,6 +11,8 @@ class Cable
         uint8_t dataS;
         uint8_t dataR;
 
+        bool verifyCodes(uint8_t send, uint8_t recieve);
+
     public:
         Cable();
         Cable(int inputPins[], int outputPins[]);
@@ -23,7 +25,10 @@ class Cable
         void printInputPins();
         void printOutputPins();
 
-        bool checkCable();
+        void checkCable();
+        void checkCableType();
+
+
 };
 
 #endif // CABLE_HPP
